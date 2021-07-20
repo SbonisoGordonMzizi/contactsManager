@@ -2,13 +2,15 @@ package com.gordonmzizi.persistance;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.sql.DataSource;
+
 public class DataAccessProd implements DataAccess {
     @Value("${prod}")
     private String prod;
-    private DataAccess dataAccess;
+    private DataSource dataSource;
 
-    public DataAccessProd(DataAccess dataAccess) {
-        this.dataAccess = dataAccess;
+    public DataAccessProd(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
