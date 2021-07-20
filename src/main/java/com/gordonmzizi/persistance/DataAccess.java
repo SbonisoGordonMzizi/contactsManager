@@ -1,4 +1,5 @@
 package com.gordonmzizi.persistance;
 
-public class DataAccess {
+public interface DataAccess {
+    void hello();
 }
