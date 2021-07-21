@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -23,7 +24,7 @@ public class AppConfigProd {
 
     @Bean
     DataAccess dataAccess(){
-        return new DataAccessProd(dataSource());
+        return new DataAccessProd(dataSource(),jdbcTemplate());
     }
 
     @Bean
@@ -35,5 +36,9 @@ public class AppConfigProd {
         dataSource.setPassword("mzizi45");
 
         return dataSource;
+    }
+    @Bean
+    public JdbcTemplate jdbcTemplate(){
+        return new JdbcTemplate(dataSource());
     }
 }

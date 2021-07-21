@@ -6,10 +6,7 @@ import com.gordonmzizi.businesslogic.Business;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-/**
- * Hello world!
- *
- */
+
 public class App {
     public static void main( String[] args ) {
         //System.setProperty("spring.profiles.active","prod");
@@ -17,7 +14,7 @@ public class App {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfigProd.class, AppConfigPreProd.class);
         Business business = context.getBean(Business.class);
-        business.getDataAccessProd().hello();
+        business.getDataAccessProd().deleteContact();
         business.getEnvironment();
     }
 }

@@ -2,20 +2,19 @@ package com.gordonmzizi.persistance;
 
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-public class DataAccessPreProd implements DataAccess{
+public class DataAccessPreProd extends DataAccessSuper {
     @Value("${preprod}")
     private String preprod;
     private DataSource dataSource;
 
-    public DataAccessPreProd(DataSource dataSource) {
+    public DataAccessPreProd(DataSource dataSource, JdbcTemplate jdbcTemplate) {
+        super(jdbcTemplate);
         this.dataSource = dataSource;
     }
 
-    @Override
-    public void hello() {
-        System.out.println("Pre-Production DATA "+this.preprod);
-    }
+
 }
