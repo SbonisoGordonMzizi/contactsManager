@@ -6,9 +6,13 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataAccessSuper implements DataAccess{
     private JdbcTemplate jdbcTemplate;
+    private ArrayList<Map<String,String>>contacts = new ArrayList<>();
+    private Map<String,String> contact = new HashMap<>();
 
     public DataAccessSuper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -16,39 +20,44 @@ public class DataAccessSuper implements DataAccess{
 
 
     @Override
-    public void addContact() {
-        Integer numberOfRowsAffected = jdbcTemplate.update("INSERT INTO contacts VALUES(1003,'Ally','ally@gmail.com')");
+    public void addContact(ArrayList<Map<String,String>> contact) {
+        String name = contact.get(0).get("name");
+        String phoneNumber = contact.get(0).get("phoneNumber");
+        Integer numberOfRowsAffected = jdbcTemplate.update("INSERT INTO contacts(name,phoneNumber) VALUES("+"\'"+name+"\'"+","+"\'"+phoneNumber+"\'"+")");
     }
 
     @Override
-    public ArrayList<String> viewContact() {
-        ArrayList<String> contacts = new ArrayList<>();
+    public ArrayList<Map<String,String>> viewContact() {
+
 
         jdbcTemplate.query("SELECT * FROM contacts", new RowCallbackHandler() {
+            int count = 0;
+
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
-                String id = resultSet.getString("id");
                 String name = resultSet.getString("name");
-                String email = resultSet.getString("email");
+                String phoneNumber = resultSet.getString("phoneNumber");
 
-                contacts.add(id);
-                contacts.add(name);
-                contacts.add(email);
-
+                contact.put("name"+count,name);
+                contact.put("phoneNumber"+count,phoneNumber);
+                contacts.add(contact);
+                count = count + 1;
             }
+
         });
 
         return contacts;
     }
 
     @Override
-    public void deleteContact() {
-
-        Integer numberOfRowsAffected = jdbcTemplate.update("DELETE FROM contacts WHERE name = 'Bob'");
+    public void deleteContact(String name) {
+       jdbcTemplate.execute("DELETE FROM contacts WHERE name = "+"\'"+name+"\'");
     }
 
     @Override
-    public void updateContact() {
-        Integer numberOfRowsAffected = jdbcTemplate.update("UPDATE contacts SET email = 'newEmail@gmail.com' WHERE name = 'Bob'");
+    public void updateContact(ArrayList<Map<String,String>> contact) {
+        String name = contact.get(0).get("name");
+        String phoneNumber = contact.get(0).get("phoneNumber");
+        jdbcTemplate.execute("UPDATE contacts SET phoneNumber = "+"\'"+phoneNumber+"\'"+" WHERE name ="+"\'"+name+"\'");
     }
 }

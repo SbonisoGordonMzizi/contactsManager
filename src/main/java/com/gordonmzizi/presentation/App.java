@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main( String[] args ) {
-        //System.setProperty("spring.profiles.active","prod");
-        System.setProperty("spring.profiles.active","pre-prod");
+        System.setProperty("spring.profiles.active","prod");
+        //System.setProperty("spring.profiles.active","pre-prod");
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfigProd.class, AppConfigPreProd.class);
         Business business = context.getBean(Business.class);
@@ -49,15 +49,31 @@ public class App {
                         contactInfo.put("name",name);
                         contactInfo.put("phoneNumber",phoneNumber);
                         contact.add(contactInfo);
+                        business.addContact(contact);
                         break;
                     case 2:
                         System.out.println("VIEW CONTACTS");
+                        contactsDisplay(business.viewContact());
                         break;
                     case 3:
                         System.out.println("UPDATE CONTACT");
+                        System.out.println("Enter a Name");
+                        name = scanner.next();
+                        System.out.println("Enter Phone Number");
+                       phoneNumber = scanner.next();
+
+                        ArrayList<Map<String,String>> contact1 = new ArrayList<>();
+                        Map<String,String> contactInfo1 = new HashMap<>();
+                        contactInfo1.put("name",name);
+                        contactInfo1.put("phoneNumber",phoneNumber);
+                        contact1.add(contactInfo1);
+                        business.updateContact(contact1);
                         break;
                     case 4:
                         System.out.println("DELETE CONTACT");
+                        System.out.println("Enter a Name");
+                        name = scanner.next();
+                        business.deleteContact(name);
                         break;
                     case 5:
                         menu();
@@ -103,8 +119,8 @@ public class App {
     public static void contactsDisplay(ArrayList<Map<String,String>> contacts){
         System.out.println("____________________________ CONTACTS ___________________________________\n");
         for(int i = 0; i < contacts.size(); ++i){
-            System.out.println("Name  \t\t:  "+contacts.get(i).get("name"));
-            System.out.println("Phone  \t\t:  "+contacts.get(i).get("phoneNumber"));
+            System.out.println("Name  \t\t:  "+contacts.get(i).get("name"+i));
+            System.out.println("Phone  \t\t:  "+contacts.get(i).get("phoneNumber"+i));
             System.out.println("\n");
         }
     }
