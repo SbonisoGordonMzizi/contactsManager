@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main( String[] args ) {
-        System.setProperty("spring.profiles.active","prod");
-        //System.setProperty("spring.profiles.active","pre-prod");
+        //System.setProperty("spring.profiles.active","prod");
+        System.setProperty("spring.profiles.active","pre-prod");
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfigProd.class, AppConfigPreProd.class);
         Business business = context.getBean(Business.class);

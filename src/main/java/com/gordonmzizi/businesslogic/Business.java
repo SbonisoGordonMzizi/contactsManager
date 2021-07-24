@@ -7,9 +7,11 @@ import org.springframework.core.env.Environment;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 public class Business implements EnvironmentAware {
    private DataAccess dataAccess;
    private Environment environment;
+
 
     public Business(DataAccess dataAccess) {
 
@@ -21,10 +23,11 @@ public class Business implements EnvironmentAware {
 
         this.environment = environment;
     }
-    public ArrayList<Map<String,String>> viewContact(){
 
+    public ArrayList<Map<String,String>> viewContact(){
         return dataAccess.viewContact();
     }
+
     public void addContact(ArrayList<Map<String,String>> contact){
         dataAccess.addContact(contact);
     }

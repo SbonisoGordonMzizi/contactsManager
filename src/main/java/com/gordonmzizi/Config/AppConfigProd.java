@@ -3,10 +3,7 @@ package com.gordonmzizi.Config;
 import com.gordonmzizi.businesslogic.Business;
 import com.gordonmzizi.persistance.DataAccess;
 import com.gordonmzizi.persistance.DataAccessProd;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -14,6 +11,8 @@ import javax.sql.DataSource;
 
 @Profile("prod")
 @Configuration
+@EnableAspectJAutoProxy
+@ComponentScan("com.gordonmzizi")
 @PropertySource("classpath:application-pro.properties")
 public class AppConfigProd {
 
