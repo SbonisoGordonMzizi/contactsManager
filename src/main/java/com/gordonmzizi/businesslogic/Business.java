@@ -25,7 +25,11 @@ public class Business implements EnvironmentAware {
     }
 
     public ArrayList<Map<String,String>> viewContact(){
-        return dataAccess.viewContact();
+
+            return dataAccess.viewContact();
+
+
+
     }
 
     public void addContact(ArrayList<Map<String,String>> contact){

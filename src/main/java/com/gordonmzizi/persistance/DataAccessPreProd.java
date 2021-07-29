@@ -9,12 +9,14 @@ import javax.sql.DataSource;
 public class DataAccessPreProd extends DataAccessSuper {
     @Value("${preprod}")
     private String preprod;
-    private DataSource dataSource;
+
 
     public DataAccessPreProd(DataSource dataSource, JdbcTemplate jdbcTemplate) {
-        super(jdbcTemplate);
-        this.dataSource = dataSource;
+        super(jdbcTemplate,dataSource);
+
     }
+
+
 
 
 }

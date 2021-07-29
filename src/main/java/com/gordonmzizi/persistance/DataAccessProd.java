@@ -12,9 +12,8 @@ public class DataAccessProd  extends DataAccessSuper {
 
 
     public DataAccessProd(DataSource dataSource,JdbcTemplate jdbcTemplate) {
-        super(jdbcTemplate);
+        super(jdbcTemplate,dataSource);
         this.dataSource = dataSource;
     }
-
 
 }

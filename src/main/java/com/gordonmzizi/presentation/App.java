@@ -118,6 +118,7 @@ public class App {
 
     public static void contactsDisplay(ArrayList<Map<String,String>> contacts){
         System.out.println("____________________________ CONTACTS ___________________________________\n");
+        System.out.println(contacts.size());
         for(int i = 0; i < contacts.size(); ++i){
             System.out.println("Name  \t\t:  "+contacts.get(i).get("name"+i));
             System.out.println("Phone  \t\t:  "+contacts.get(i).get("phoneNumber"+i));
